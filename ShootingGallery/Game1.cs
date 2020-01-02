@@ -15,6 +15,10 @@ namespace ShootingGallery
 
         SpriteFont gameFont;
 
+        Vector2 targetPosition = new Vector2(300, 300);
+
+        const int TARGET_RADIUS = 45;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -70,7 +74,7 @@ namespace ShootingGallery
             spriteBatch.Draw(sprite_Background, new Vector2(0,0), Color.White);
 
             spriteBatch.DrawString(gameFont, "Test Message", new Vector2(100, 100), Color.White);
-            spriteBatch.Draw(sprite_Target, new Vector2(0,0), Color.White);
+            spriteBatch.Draw(sprite_Target, targetPosition, Color.White);
 
             // always have an end
             spriteBatch.End();
