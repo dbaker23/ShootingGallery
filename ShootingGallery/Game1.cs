@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ShootingGallery
 {
@@ -74,7 +75,14 @@ namespace ShootingGallery
             if (mState.LeftButton == ButtonState.Pressed && mReleased)
             {
                 if (mouseTargetDist < TARGET_RADIUS)
+                {
                     score++;
+
+                    Random rand = new Random();
+
+                    targetPosition.X = rand.Next(TARGET_RADIUS, graphics.PreferredBackBufferWidth - TARGET_RADIUS + 1);
+                    targetPosition.Y = rand.Next(TARGET_RADIUS, graphics.PreferredBackBufferHeight - TARGET_RADIUS + 1);
+                }
 
                 mReleased = false;
             }
@@ -95,8 +103,9 @@ namespace ShootingGallery
 
             spriteBatch.Draw(sprite_Background, new Vector2(0,0), Color.White);
 
-            spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
             spriteBatch.Draw(sprite_Target, new Vector2(targetPosition.X - TARGET_RADIUS, targetPosition.Y - TARGET_RADIUS), Color.White);
+
+            spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
 
             // always have an end
             spriteBatch.End();
