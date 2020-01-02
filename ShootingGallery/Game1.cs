@@ -15,6 +15,11 @@ namespace ShootingGallery
 
         SpriteFont gameFont;
 
+        MouseState mState;
+        bool mReleased = true;
+
+        int score = 0;
+
         Vector2 targetPosition = new Vector2(300, 300);
 
         const int TARGET_RADIUS = 45;
@@ -23,6 +28,8 @@ namespace ShootingGallery
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            IsMouseVisible = true;
         }
 
         // ran when game first loads
@@ -53,12 +60,21 @@ namespace ShootingGallery
         }
 
         // game loop, default 60 fps
+        // method is ran every frame
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            mState = Mouse.GetState();
+            if (mState.LeftButton == ButtonState.Pressed && mReleased)
+            {
+                score++;
+                mReleased = false;
+            }
+
+            if (mState.LeftButton == ButtonState.Released)
+                mReleased = true;
 
             base.Update(gameTime);
         }
@@ -73,7 +89,7 @@ namespace ShootingGallery
 
             spriteBatch.Draw(sprite_Background, new Vector2(0,0), Color.White);
 
-            spriteBatch.DrawString(gameFont, "Test Message", new Vector2(100, 100), Color.White);
+            spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
             spriteBatch.Draw(sprite_Target, targetPosition, Color.White);
 
             // always have an end
