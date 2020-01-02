@@ -9,6 +9,10 @@ namespace ShootingGallery
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Texture2D sprite_Target;
+        Texture2D sprite_Crosshair;
+        Texture2D sprite_Background;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -29,7 +33,9 @@ namespace ShootingGallery
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            sprite_Target = Content.Load<Texture2D>("target");
+            sprite_Crosshair = Content.Load<Texture2D>("crosshairs");
+            sprite_Background = Content.Load<Texture2D>("sky");
         }
 
         // free up memory
@@ -54,7 +60,13 @@ namespace ShootingGallery
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            // tell the library that it's time to draw
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(sprite_Target, new Vector2(0,0), Color.White);
+
+            // always have an end
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
