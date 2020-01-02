@@ -63,6 +63,7 @@ namespace ShootingGallery
             // tell the library that it's time to draw
             spriteBatch.Begin();
 
+            spriteBatch.Draw(sprite_Background, new Vector2(0,0), Color.White);
             spriteBatch.Draw(sprite_Target, new Vector2(0,0), Color.White);
 
             // always have an end
