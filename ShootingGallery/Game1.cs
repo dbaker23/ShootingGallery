@@ -13,6 +13,8 @@ namespace ShootingGallery
         Texture2D sprite_Crosshair;
         Texture2D sprite_Background;
 
+        SpriteFont gameFont;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +38,8 @@ namespace ShootingGallery
             sprite_Target = Content.Load<Texture2D>("target");
             sprite_Crosshair = Content.Load<Texture2D>("crosshairs");
             sprite_Background = Content.Load<Texture2D>("sky");
+
+            gameFont = Content.Load<SpriteFont>("galleryFont");
         }
 
         // free up memory
@@ -64,6 +68,8 @@ namespace ShootingGallery
             spriteBatch.Begin();
 
             spriteBatch.Draw(sprite_Background, new Vector2(0,0), Color.White);
+
+            spriteBatch.DrawString(gameFont, "Test Message", new Vector2(100, 100), Color.White);
             spriteBatch.Draw(sprite_Target, new Vector2(0,0), Color.White);
 
             // always have an end
